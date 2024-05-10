@@ -111,14 +111,7 @@ public class DailyCaloriesActivity extends AppCompatActivity {
             double weight = Double.parseDouble(weightStr);
             double height = Double.parseDouble(heightStr);
 
-            if (gender.equals("male")) {
-                dailyCalories = 66.473 + (13.752 * weight) + (5.003 * height) - (6.775 * age);
-            } else if (gender.equals("female")) {
-                dailyCalories = 655.1 + (9.563 * weight) + (1.85 * height) - (4.676 * age);
-            } else {
-                dailyCalories = 0.0d;
-                System.out.println("Something went wrong");
-            }
+            dailyCalories = DailyCaloriesCalculator.calculateDailyCalories(gender, weight, height, age);
 
             dailyCalRes.setText(String.format(Locale.getDefault(), "%.0f", dailyCalories) + " kcal");
         }
