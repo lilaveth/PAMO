@@ -1,7 +1,9 @@
 package com.example.bmicalculator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -10,11 +12,13 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.text.NumberFormat;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    private Toolbar actionBar;
 
     private EditText weightEditText;
     private EditText heightEditText;
@@ -22,28 +26,23 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView BMIResult;
 
-//    private final TextWatcher bmiTextWatcher = new TextWatcher() {
-//
-//        @Override
-//        public void onTextChanged(CharSequence s, int start,
-//                                  int before, int count) {
-//            calculateAndDisplayBMI();
-//        }
-//
-//        @Override
-//        public void afterTextChanged(Editable s) { }
-//
-//        @Override
-//        public void beforeTextChanged(
-//                CharSequence s, int start, int count, int after) { }
-//    };
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        actionBar = (Toolbar) findViewById(R.id.toolbarBMI);
+
+        setSupportActionBar(actionBar);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\">" + getString(R.string.app_name) + "</font>"));
+        actionBar.setNavigationIcon(R.drawable.baseline_arrow_back_24);
+        actionBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         weightEditText = findViewById(R.id.editTextWeight);
         heightEditText = findViewById(R.id.editTextHeight);
@@ -56,9 +55,18 @@ public class MainActivity extends AppCompatActivity {
 //            return insets;
 //        });
         final Button calculateButton = findViewById(R.id.buttonCalculate);
+        final Button continueButton = findViewById(R.id.continueButton);
         calculateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 calculateBMI();
+            }
+        });
+
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DailyCaloriesActivity.class);
+                startActivity(intent);
             }
         });
     }
