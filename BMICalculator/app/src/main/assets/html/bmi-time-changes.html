@@ -1,0 +1,35 @@
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+          var data = google.visualization.arrayToDataTable([
+            ['Day', 'BMI'],
+            ['Day 1', 27.7],
+            ['Day 14', 26.9],
+            ['Day 28', 26.1],
+            ['Day 35', 25.5],
+            ['Day 48', 24.4]
+          ]);
+
+          var options = {
+          title: 'BMI change',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+
+          var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+          chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+<div id="curve_chart" style="width: 400px; height: 300px;"></div>
+</body>
+</html>
