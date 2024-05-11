@@ -6,6 +6,8 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -59,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         });
         final Button calculateButton = findViewById(R.id.buttonCalculate);
         final Button continueButton = findViewById(R.id.continueButton);
+        final Button bmiTimelineButton = findViewById(R.id.bmiTimelineButton);
+
         calculateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 calculateBMI();
@@ -69,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, DailyCaloriesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        bmiTimelineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, BmiTimelineActivity.class);
                 startActivity(intent);
             }
         });
